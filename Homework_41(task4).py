@@ -1,3 +1,3 @@
-def is_palindrom(string):
+def is_palindrom(string): 
     return string == string[::-1]
 print(is_palindrom('abccba'))
