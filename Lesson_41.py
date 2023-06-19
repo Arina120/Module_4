@@ -13,6 +13,7 @@ def strcount(s):
     el_counter = {}
     for el in s:
         el_counter[el] = el_counter.get(el, 0) + 1
+    
     for el, count in el_counter.items():
         print(el, count)
 strcount('aaabcd-5')
