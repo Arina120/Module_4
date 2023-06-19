@@ -1,0 +1,21 @@
+h1{
+    background: salmon;
+}
+.paragraph-1{
+    background: khaki;
+    font-size: 32pt;
+    color: seagreen;
+
+}
+.paragraph-2{
+    border: 10px solid lightseagreen;
+    border-radius: 20px;
+    font-size: 24pt;
+    margin-bottom: 60px;
+    padding-bottom: 60pt;
+}
+.paragraph-3{
+    font-weight: bold;
+    font-size: 22px;
+    font-family: Courier New;
+}
