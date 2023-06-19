@@ -17,4 +17,4 @@ def strcount(s):
     for el, count in el_counter.items():
         print(el, count)
 strcount('aaabcd-5')
-print(set('aaabcd-5'))
+print(set('aaabcd-5')) 
