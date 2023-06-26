@@ -1,3 +1,7 @@
+body{
+    background: lemonchiffon;
+}
+
 h1{
     background: salmon;
 }
@@ -18,4 +22,11 @@ h1{
     font-weight: bold;
     font-size: 22px;
     font-family: Courier New;
+}
+.paragraph-4{
+    font-size: 24px;
+    text-align: center;
+    font-style: italic;
+    text-shadow: 1px 2px 4px seagreen;
+
 }
