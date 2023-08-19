@@ -1,7 +1,11 @@
 from django.db import models
 from django.contrib import admin
 from django.utils.html import format_html
+from django.contrib.auth import get_user_model
 # Create your models here.
+
+User = get_user_model()
+
 class Advertisement(models.Model):
     title = models.CharField('Заголовок', max_length=128)
     description = models.TextField('Описание')
@@ -10,6 +14,8 @@ class Advertisement(models.Model):
     connection = models.BooleanField('Связь', help_text='Отметьте, если возможна связь с продавцом', default=True)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    image = models.ImageField('Изображение', upload_to='advertisements/')
     
     @admin.display(description='Дата создания')
     def created_date(self):
