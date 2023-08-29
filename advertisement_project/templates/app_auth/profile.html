@@ -21,8 +21,9 @@
         <span style="font-weight: bold;">Разместить объявление</span>
       </a>
     </li>
+    {% if not user.is_authenticated %}
     <li class="nav-item">
-      <a class="nav-link" href="register.html">
+      <a class="nav-link" href="{% url 'register' %}">
         <span style="font-weight: bold;">Регистрация</span>
       </a>
     </li>
@@ -31,6 +32,7 @@
         <span style="font-weight: bold;">Войти</span>
       </a>
     </li>
+    {% else %}
     <li class="nav-item">
       <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">
         <span style="font-weight: bold;">Профиль</span>
@@ -41,10 +43,20 @@
         <span style="font-weight: bold;">Выйти</span>
       </a>
     </li>
+    {% endif %}
   </ul>
 <div class="col" style="margin: 50px;">
-  <div class="display-2">
-    <span class="badge bg-primary">Сейчас вы находитесь на сайте под ником {{ user }}.</span>
+  <div class="display-3">
+    <span class="badge bg-primary">Сейчас вы находитесь на сайте <br> под ником {{ user }}.</span>
+  </div>
+</div>
+<div class="card" style="width: 50rem; margin-left: 40px;">
+  <div class="card-body">
+    <h4 class="card-title">Информация о пользователе {{ user }}</h5>
+    <h5 class="card-subtitle mb-2 text-body-secondary">Имя пользователя: {{ user.first_name }}</h6>
+    <p class="card-text">Фамилия пользователя: {{ user.last_name }}</p>
+    <a href="{% url 'main-page' %}" class="card-link">Посмотреть обьявления</a>
+    
   </div>
 </div>
 {% endblock %}

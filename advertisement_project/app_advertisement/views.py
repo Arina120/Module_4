@@ -1,19 +1,30 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Advertisement
+from .models import Advertisement, User
 from .forms import AdvertisementForm
 from django.urls import reverse
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Count
 # Create your views here.
 def index(request):
-    advertisements = Advertisement.objects.all()
-    context = {'advertisements' : advertisements}
+    title = request.GET.get('query')
+    if title:
+        advertisements =  Advertisement.objects.filter(title__icontains=title)
+    else:
+        advertisements = Advertisement.objects.all()
+    context = {'advertisements' : advertisements,
+    'title':title,}
     return render(request, 'app_advertisements/index.html', context)
 
 def top_sellers(request):
-    return render(request, 'app_advertisements/top-sellers.html')
+    users = User.objects.annotate(
+        adv_count=Count('advertisement')
+    ).order_by('-adv_count')
+    context = {
+        'users':users
+    }
+    return render(request, 'app_advertisements/top-sellers.html', context)
 
 @login_required(login_url=reverse_lazy('login'))
 def advertisement_post(request):
@@ -29,3 +40,10 @@ def advertisement_post(request):
         form = AdvertisementForm()
     context = {'form' : form}
     return render(request, 'app_advertisements/advertisement-post.html', context)
+
+def advertisement_detail(request, pk):
+    advertisement = Advertisement.objects.get(id=pk)
+    context = {
+        'advertisement':advertisement
+    }
+    return render(request, 'app_advertisements/advertisement.html', context)
